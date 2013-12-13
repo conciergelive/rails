@@ -30,11 +30,12 @@ module ActiveRecord
 
       protected
         def construct_find_options!(options)
+          super
           options[:joins]      = @join_sql
           options[:readonly]   = finding_with_ambiguous_select?(options[:select] || @reflection.options[:select])
           options[:select]   ||= (@reflection.options[:select] || '*')
         end
-        
+
         def count_records
           load_target.size
         end
