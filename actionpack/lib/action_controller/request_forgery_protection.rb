@@ -80,7 +80,9 @@ module ActionController #:nodoc:
       end
 
       def handle_unverified_request
-        raise "Request is unverified! The authenticity token is #{form_authenticity_token}, but they sent the param #{form_authenticity_param.inspect} and the header #{request.headers['X-CSRF-Token'].inspect}"
+        puts "************************************"
+        puts "Request reser because unverified! The authenticity token is #{form_authenticity_token}, but they sent the param #{form_authenticity_param.inspect} and the header #{request.headers['X-CSRF-Token'].inspect}"
+        puts "************************************"
         reset_session
       end
 
