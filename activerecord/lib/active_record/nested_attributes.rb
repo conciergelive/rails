@@ -292,7 +292,6 @@ module ActiveRecord
         raise_nested_attributes_record_not_found(association_name, attributes['id'])
 
       elsif !reject_new_record?(association_name, attributes)
-        binding.pry
         method = "build_#{association_name}"
         if respond_to?(method)
           send(method, attributes.except(*UNASSIGNABLE_KEYS))
