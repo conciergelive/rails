@@ -279,7 +279,8 @@ module ActiveRecord
       return true if association.destroyed? || association.marked_for_destruction?
 
       unless valid = association.valid?
-        if reflection.options[:autosave]
+        # always copy the erorrs, without the error messages arent good
+        if true || reflection.options[:autosave]
           association.errors.each_error do |attribute, error|
             attribute = "#{reflection.name}.#{attribute}"
             errors.add(attribute, error.dup) unless errors.on(attribute)
