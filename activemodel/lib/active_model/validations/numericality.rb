@@ -44,7 +44,7 @@ module ActiveModel
         end
 
         validates_each(attr_names,configuration) do |record, attr_name, value|
-          raw_value = record.send("#{attr_name}_before_type_cast") || value
+          raw_value = (record.respond_to?("#{attr_name}_before_type_cast") && record.send("#{attr_name}_before_type_cast")) || value
 
           next if configuration[:allow_nil] and raw_value.nil?
 
