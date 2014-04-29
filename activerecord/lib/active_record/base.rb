@@ -2485,7 +2485,7 @@ module ActiveRecord #:nodoc:
         self.attributes = attributes unless attributes.nil?
         assign_attributes(self.class.send(:scope, :create)) if self.class.send(:scoped?, :create)
         result = yield self if block_given?
-        callback(:after_initialize) if respond_to_without_attributes?(:after_initialize)
+        #callback(:after_initialize) if respond_to_without_attributes?(:after_initialize)
         result
       end
 
