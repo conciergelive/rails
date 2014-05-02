@@ -406,6 +406,8 @@ Run `rake gems:install` to install the missing gems.
 
     # Eager load application classes
     def load_application_classes
+      # disabled because we need to preload the app classes for the delayed job rake task
+      # otherwise yaml blows up when it tries to load a contact that doesnt exist
       #return if $rails_rake_task && configuration.dependency_loading
       return if ENV['DONT_LOAD_APP_CLASSES'] == "true"
       if configuration.cache_classes
