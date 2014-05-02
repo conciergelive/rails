@@ -407,6 +407,7 @@ Run `rake gems:install` to install the missing gems.
     # Eager load application classes
     def load_application_classes
       #return if $rails_rake_task && configuration.dependency_loading
+      return if ENV['DONT_LOAD_APP_CLASSES'] == "true"
       if configuration.cache_classes
         configuration.eager_load_paths.each do |load_path|
           matcher = /\A#{Regexp.escape(load_path)}(.*)\.rb\Z/
