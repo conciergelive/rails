@@ -183,8 +183,15 @@ module ActiveRecord
           evaluate_attribute_method attr_name, "def #{attr_name}?; query_attribute('#{attr_name}'); end", "#{attr_name}?"
         end
 
+        
         def define_write_method(attr_name)
-          evaluate_attribute_method attr_name, "def #{attr_name}=(new_value);write_attribute('#{attr_name}', new_value);end", "#{attr_name}="
+          method_body = <<-fuck_rails_2
+            def #{attr_name}=(new_value)
+              write_attribute('#{attr_name}', new_value)
+              clear_object_variable_cache('#{attr_name}', new_value)
+            end
+          fuck_rails_2
+          evaluate_attribute_method attr_name, method_body, "#{attr_name}="
         end
 
         # Defined for all serialized attributes. Disallows assigning already serialized YAML.
@@ -234,7 +241,15 @@ module ActiveRecord
           end
         end
     end #  ClassMethods
-
+    def clear_object_variable_cache(attr_name, new_value)      
+      if attr_name =~ /_id$/
+        object_method_name = attr_name.gsub(/_id$/, '')
+        instance_variable_value = instance_variable_get("@#{object_method_name}")
+        if instance_variable_value.respond_to?(:id) && instance_variable_value.try(:id) != new_value
+          instance_variable_set("@#{object_method_name}", nil)
+        end
+      end
+    end
 
     # Allows access to the object attributes, which are held in the <tt>@attributes</tt> hash, as though they
     # were first-class methods. So a Person class with a name attribute can use Person#name and
