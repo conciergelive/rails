@@ -22,11 +22,12 @@ module Rails
       add_gem_filters
 
       add_silencer { |line| ALL_NOISE.any? { |dir| line.include?(dir) } }
+      add_silencer { |line| line =~ /^\// } # if the line has an absolute path
       add_silencer { |line| RAILS_GEMS.any? { |gem| line =~ /^#{gem} / } }
       add_silencer { |line| line =~ %r(vendor/plugins/[^\/]+/lib) }
     end
-    
-    
+
+
     private
       def add_gem_filters
         Gem.path.each do |path|
