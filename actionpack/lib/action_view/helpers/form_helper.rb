@@ -501,7 +501,7 @@ module ActionView
 
       # Returns a label tag tailored for labelling an input field for a specified attribute (identified by +method+) on an object
       # assigned to the template (identified by +object+). The text of label will default to the attribute name unless a translation
-      # is found in the current I18n locale (through views.labels.<modelname>.<attribute>) or you specify it explicitly. 
+      # is found in the current I18n locale (through views.labels.<modelname>.<attribute>) or you specify it explicitly.
       # Additional options on the label tag can be passed as a hash with +options+. These options will be tagged
       # onto the HTML as an HTML element attribute as in the example shown, except for the <tt>:value</tt> option, which is designed to
       # target labels for radio_button tags (where the value is used in the ID of the input tag).
@@ -657,8 +657,8 @@ module ActionView
 
       # Returns a checkbox tag tailored for accessing a specified attribute (identified by +method+) on an object
       # assigned to the template (identified by +object+). This object must be an instance object (@object) and not a local object.
-      # It's intended that +method+ returns an integer and if that integer is above zero, then the checkbox is checked. 
-      # Additional options on the input tag can be passed as a hash with +options+. The +checked_value+ defaults to 1 
+      # It's intended that +method+ returns an integer and if that integer is above zero, then the checkbox is checked.
+      # Additional options on the input tag can be passed as a hash with +options+. The +checked_value+ defaults to 1
       # while the default +unchecked_value+ is set to 0 which is convenient for boolean values.
       #
       # ==== Gotcha
@@ -1042,7 +1042,7 @@ module ActionView
       def radio_button(method, tag_value, options = {})
         @template.radio_button(@object_name, method, tag_value, objectify_options(options))
       end
-      
+
       def hidden_field(method, options = {})
         @emitted_hidden_id = true if method == :id
         @template.hidden_field(@object_name, method, objectify_options(options))

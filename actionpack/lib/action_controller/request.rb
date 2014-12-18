@@ -21,6 +21,10 @@ module ActionController
       end
     end
 
+    def inspect
+      "#<#{self.class} ...>"
+    end
+
     def key?(key)
       @env.key?(key)
     end
