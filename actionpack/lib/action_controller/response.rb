@@ -51,10 +51,6 @@ module ActionController # :nodoc:
       @assigns = []
     end
 
-    def inspect
-      "#<#{self.class} ...>"
-    end
-
     def location; headers['Location'] end
     def location=(url) headers['Location'] = url end
 
